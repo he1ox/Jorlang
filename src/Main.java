@@ -1,9 +1,9 @@
 // Importar las clases necesarias
+import Jorlang.JorlangLexer;
+import Jorlang.JorlangParser;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
-import test.testLexer;
-import test.testParser;
-import test.testVisitor;
+
 
 import java.io.File;
 import java.util.Map;
@@ -19,13 +19,13 @@ public class Main {
         CharStream input = CharStreams.fromFileName(fileName);
 
         // Crear el lexer con el CharStream
-        testLexer lexer = new testLexer(input);
+        JorlangLexer lexer = new JorlangLexer(input);
 
         // Crear el CommonTokenStream con el lexer
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 
         // Crear el parser con el CommonTokenStream
-        testParser parser = new testParser(tokens);
+        JorlangParser parser = new JorlangParser(tokens);
 
         // Reemplazar los error listeners predeterminados con el CustomErrorListener
         parser.removeErrorListeners(); // Eliminar los error listeners predeterminados
@@ -63,7 +63,7 @@ public class Main {
     public static void printTokens(CommonTokenStream tokens) {
         System.out.printf("%-20s %-20s %-20s\n", "Token", "Texto", "Posición");
         for (Token token : tokens.getTokens()) {
-            String tokenName = testLexer.VOCABULARY.getDisplayName(token.getType());
+            String tokenName = JorlangLexer.VOCABULARY.getDisplayName(token.getType());
             String tokenText = token.getText();
             String tokenPosition = "(" + token.getLine() + ":" + token.getCharPositionInLine() + ")";
             System.out.printf("%-20s %-20s %-20s\n", tokenName, tokenText, tokenPosition);

@@ -1,12 +1,11 @@
-import test.testBaseVisitor;
-import test.testParser;
+import Jorlang.*;
 
-public class SymbolTableVisitor extends testBaseVisitor<Void> {
+public class SymbolTableVisitor extends JorlangBaseVisitor<Void> {
     private SymbolTable symbolTable = new SymbolTable();
     private EvaluatorVisitor evaluatorVisitor = new EvaluatorVisitor();
 
     @Override
-    public Void visitDeclaration(testParser.DeclarationContext ctx) {
+    public Void visitDeclaration(JorlangParser.DeclarationContext ctx) {
         String varName = ctx.ID().getText();
         if (ctx.expression() != null) {
             Object value = evaluatorVisitor.visit(ctx.expression());
